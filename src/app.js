@@ -343,7 +343,9 @@ app.get('/contest', function(req, res) {
 			  			// console.log(data);
 
 			  			T.post('statuses/retweet/:id', { id: id }, function (err, data, response) {
-						  console.log(data);
+						  // console.log(data);
+						  console.log('Reweet Complete');
+						  res.write( 'Reweet Complete' );	
 						  res.end();
 						})
 
