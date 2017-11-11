@@ -256,6 +256,7 @@ app.get('/create', function(req, res) {
 		console.log(data);
 		console.log(response.statusCode);
 		console.log(response.statusCode);
+		res.write(response.statusCode);
 		res.end();
 	  }
 	  
@@ -269,6 +270,10 @@ app.get('/contest', function(req, res) {
   // Start process
   
   res.writeHead(200, {'Content-Type': 'text/html'}); 
+
+  console.log('Starting.... /contest');
+  res.write( 'Starting.... /contest' );	
+
 
   var T = new Twit( {
       consumer_key: process.env.twitter_consumer_key,
