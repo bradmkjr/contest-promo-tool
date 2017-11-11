@@ -214,8 +214,6 @@ app.get('/followers', function(req, res) {
 app.get('/create', function(req, res) {
   // Start process
   
-  return;
-
   res.writeHead(200, {'Content-Type': 'text/html'}); 
 
   var T = new Twit( {
@@ -225,9 +223,10 @@ app.get('/create', function(req, res) {
       access_token_secret: process.env.twitter_access_token_secret
     } );
 
+  	var name = 'Contests-and-Raffles';
+  	var description = 'Enter to win tons of free contest and raffles.';
 
-  	var name = 'Amazon-Giveaways';
-  	var description = 'Win free items from Amazon.';
+  	return;
 
   	//
 	//  Creates a new list for the authenticated user. Note that you can create up to 1000 lists per account.
@@ -266,7 +265,7 @@ app.get('/create', function(req, res) {
 
 }); // end get /create
 
-app.get('/amazon', function(req, res) {
+app.get('/contest', function(req, res) {
   // Start process
   
   res.writeHead(200, {'Content-Type': 'text/html'}); 
@@ -279,9 +278,9 @@ app.get('/amazon', function(req, res) {
     } );
 
   	//
-	//  search twitter for all tweets containing the word '#coupon'
+	//  search twitter for all tweets containing the word '#contest'
 	//
-	T.get('search/tweets', { q: '#amazongiveaway', count: 1, result_type: 'recent' }, function(error, data, response) {
+	T.get('search/tweets', { q: '#contest enter', count: 1, result_type: 'recent' }, function(error, data, response) {
 	  // console.log(data);
 	  // console.log(data.statuses.length);
 	  // console.log(response);
@@ -295,7 +294,6 @@ app.get('/amazon', function(req, res) {
 
 	  	console.log(status.text);
 	  	res.write( 'Tweet: ' + status.text );	
-
 
 	  	var id = status.id_str;
 
@@ -315,18 +313,19 @@ app.get('/amazon', function(req, res) {
 	  			console.log(data.following);
 	  			res.write( 'Following Status: ' + data.following );	
 
-  				// id: 927619976969650176,
-				// id_str: '927619976969650176',
-				// name: 'Amazon-Giveaways',
-				// uri: '/vannsgiveaways/lists/amazon-giveaways',
-
-				// id: 15188045,
-				//  id_str: '15188045',
-				//  name: 'Promo Deals & Offers',
-				//  screen_name: 'vannscoupons',
+				// id: 929158451766353900,
+				// id_str: '929158451766353920',
+				// name: 'Contests-and-Raffles',
+				// uri: '/vannscontests/lists/contests-and-raffles',
 
 
-				T.post('lists/members/create', { list_id: '927619976969650176', owner_id: '15188045', user_id: status.user.id_str, screen_name: status.user.screen_name }, function(error, data, response) {
+				// id: 15188191,
+				// id_str: '15188191',
+				// name: 'Contests, Jackpots & more',
+				// screen_name: 'vannscontests',
+				
+
+				T.post('lists/members/create', { list_id: '929158451766353920', owner_id: '15188191', user_id: status.user.id_str, screen_name: status.user.screen_name }, function(error, data, response) {
 
 			  		// console.log(data);
 			  		// console.log(response);
@@ -393,7 +392,7 @@ app.get('/amazon', function(req, res) {
 	}); // end search/tweets
 
 
-}); // end get /amazon
+}); // end get /contest
 
 app.get('/retweet', function(req, res) {
   // Start process
