@@ -1,0 +1,37 @@
+{
+  "name": "giveaway-promo-tool",
+  "version": "1.0.1",
+  "description": "Retweets #Giveaways and #Contests",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "phrasejumble": "git+https://git@github.com/bradmkjr/phrasejumble.git",
+    "querystring": "^0.2.0",
+    "sqlcachedb": "^1.1.4",
+    "sqlite3": "^3.1.13",
+    "twit": "^2.2.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradmkjr/giveaway-promo-tool.git"
+  },
+  "keywords": [
+    "giveaways",
+    "promotion",
+    "oauth",
+    "twitter",
+    "affiliate",
+    "contests"
+  ],
+  "author": "Bradford Knowlton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bradmkjr/giveaway-promo-tool/issues"
+  },
+  "homepage": "https://github.com/bradmkjr/giveaway-promo-tool#readme"
+}
