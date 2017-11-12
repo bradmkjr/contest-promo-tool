@@ -347,21 +347,32 @@ app.get('/contest', function(req, res) {
 			  			// console.log(data);
 
 			  			T.post('statuses/retweet/:id', { id: id }, function (err, data, response) {
-						  // console.log(data);
-						  console.log('Reweet Complete');
-						  res.write( 'Reweet Complete' );	
-						  res.end();
+						  if( data != undefined && !error && response.statusCode == 200 ){
+			  			  	  // console.log(data);
+			  			  	  console.log(response.statusCode);
+							  res.write( 'Retweeted!');	
+							  res.end();
+			  			  }
+			  			  else if( error )
+						  {
+							console.log(error);	
+							res.write(response.statusCode);
+							res.end();  			
+						  }
 						})
 
 			  		}
 			  		else if( error )
 			  		{
 						console.log(error);	  			
+
+						console.log('Reweet Failed');
+						res.write( 'Reweet Failed' );	
+
+						res.end();	
 			  		}
-
-			  		res.end();	
-
-			  	});
+			  	
+			  	}); // end tweet
 
 
 
