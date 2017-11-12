@@ -446,29 +446,33 @@ app.get('/retweet', function(req, res) {
 
 	  	// console.log(status);
 
-	  	console.log(status.text);
+	  	console.log('Tweet: ' +status.text);
 	  	res.write( 'Tweet: ' + status.text );	
 
 
 	  	// res.write( status.user.id_str );	
+	  	console.log( 'User: ' + status.user.name );	
 	  	res.write( 'User: ' + status.user.name );	
 	  	// console.log( status.user.screen_name );	
+	  	console.log( 'Screen Name: ' + status.user.screen_name );	
 	  	res.write( 'Screen Name: ' + status.user.screen_name );	
-
+	  	
 
 	  	var status = data.statuses[0].retweeted_status;
 
-	  	// console.log(status);
+	  	// console.log(status.text);
+	  	console.log( 'Original Tweet: ' + status.text );	
+	  	res.write( 'Original Tweet: ' + status.text );	
 
-	  	console.log(status.text);
-	  	res.write( 'Tweet: ' + status.text );	
-
+	  	// retweeted id
 	  	var id = status.id_str;
 
 	  	// res.write( status.user.id_str );	
-	  	res.write( 'User: ' + status.user.name );	
+	  	console.log( 'Original User: ' + status.user.name );	
+	  	res.write( 'Original User: ' + status.user.name );	
 	  	// console.log( status.user.screen_name );	
-	  	res.write( 'Screen Name: ' + status.user.screen_name );	
+	  	console.log( 'Original Screen Name: ' + status.user.screen_name );	
+	  	res.write( 'Original Screen Name: ' + status.user.screen_name );	
 
 	  	T.post('friendships/create', { user_id: status.user.id_str }, function(error, data, response) {
 
@@ -478,7 +482,7 @@ app.get('/retweet', function(req, res) {
 	  		if( data != undefined && !error && response.statusCode == 200 ){
 
 	  			// console.log(response);
-	  			console.log(data.following);
+	  			console.log('Following Status: ' +data.following);
 	  			res.write( 'Following Status: ' + data.following );	
 
   				// id: 929158451766353920,
@@ -501,7 +505,7 @@ app.get('/retweet', function(req, res) {
 			  		if( data != undefined && !error && response.statusCode == 200 ){
 
 			  			// console.log(response);
-			  			console.log( data.member_count );
+			  			console.log( 'Member Count: '+data.member_count );
 			  			res.write( 'Member Count: '+data.member_count );	
 			  			// console.log(data);
 
@@ -509,14 +513,20 @@ app.get('/retweet', function(req, res) {
 						  
 			  			  if( data != undefined && !error && response.statusCode == 200 ){
 			  			  	  // console.log(data);
-			  			  	  console.log(response.statusCode);
+			  			  	  console.log('Status Code: '+response.statusCode);
+							  
 							  res.write( 'Retweeted!');	
+							  console.log( 'Retweeted!');	
+
 							  res.end();
 			  			  }
 			  			  else if( error )
 						  {
 							console.log(error);	
-							res.write(response.statusCode);
+							
+							res.write('Status Code: '+response.statusCode);
+							console.log('Status Code: '+response.statusCode);
+							
 							res.end();  			
 						  }
 						  
