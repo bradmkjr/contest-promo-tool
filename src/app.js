@@ -509,7 +509,7 @@ app.get('/retweet', function(req, res) {
 			  			res.write( 'Member Count: '+data.member_count );	
 			  			// console.log(data);
 
-			  			T.post('statuses/retweet/:id', { id: id }, function (err, data, response) {
+			  			T.post('statuses/retweet/:id', { id: id }, function(error, data, response) {
 						  
 			  			  if( data != undefined && !error && response.statusCode == 200 ){
 			  			  	  // console.log(data);
@@ -526,7 +526,7 @@ app.get('/retweet', function(req, res) {
 							
 							res.write('Status Code: '+response.statusCode);
 							console.log('Status Code: '+response.statusCode);
-							
+
 							res.end();  			
 						  }
 						  
