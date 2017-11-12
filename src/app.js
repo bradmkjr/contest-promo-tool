@@ -32,6 +32,8 @@ var goldBoxDealsURL = 'https://rssfeeds.s3.amazonaws.com/goldbox';
 
 var promoCodesURL = 'https://affiliate-program.amazon.com/resource-center/amazon-promo-codes-for-associates/';
 
+console.log('Starting Up!!!');
+
 /**
 *
 * Http Server
@@ -216,6 +218,8 @@ app.get('/create', function(req, res) {
   
   res.writeHead(200, {'Content-Type': 'text/html'}); 
 
+  console.log('Starting List Create');
+
   var T = new Twit( {
       consumer_key: process.env.twitter_consumer_key,
       consumer_secret: process.env.twitter_consumer_secret,
@@ -391,7 +395,7 @@ app.get('/contest', function(req, res) {
 		console.log(data);
 		console.log(response.statusCode);
 
-		console.log(response.statusCode);
+		res.write(response.statusCode);
 		res.end();
 	  }
 	  
@@ -406,6 +410,9 @@ app.get('/retweet', function(req, res) {
   
   res.writeHead(200, {'Content-Type': 'text/html'}); 
 
+  console.log('Starting.... /retweet');
+  res.write( 'Starting.... /retweet' );	
+
   var T = new Twit( {
       consumer_key: process.env.twitter_consumer_key,
       consumer_secret: process.env.twitter_consumer_secret,
@@ -416,7 +423,7 @@ app.get('/retweet', function(req, res) {
   	//
 	//  search twitter for all tweets containing the word '#coupon'
 	//
-	T.get('search/tweets', { q: '#giveaway', count: 1, result_type: 'recent' }, function(error, data, response) {
+	T.get('search/tweets', { q: '#contest enter', count: 1, result_type: 'recent' }, function(error, data, response) {
 	  // console.log(data);
 	  // console.log(data.statuses.length);
 	  // console.log(response);
@@ -463,19 +470,19 @@ app.get('/retweet', function(req, res) {
 	  			console.log(data.following);
 	  			res.write( 'Following Status: ' + data.following );	
 
-  				// id: 927408685214658561,
-				// id_str: '927408685214658561',
-				// name: 'Free-Shipping-Codes',
-				// uri: '/vannscoupons/lists/free-shipping-codes',
+  				// id: 929158451766353900,
+				// id_str: '929158451766353920',
+				// name: 'Contests-and-Raffles',
+				// uri: '/vannscontests/lists/contests-and-raffles',
 
 
-				// id: 15188045,
-				//  id_str: '15188045',
-				//  name: 'Promo Deals & Offers',
-				//  screen_name: 'vannscoupons',
+				// id: 15188191,
+				// id_str: '15188191',
+				// name: 'Contests, Jackpots & more',
+				// screen_name: 'vannscontests',
 
 
-				T.post('lists/members/create', { list_id: '927408685214658561', owner_id: '15188045', user_id: status.user.id_str, screen_name: status.user.screen_name }, function(error, data, response) {
+				T.post('lists/members/create', { list_id: '929158451766353900', owner_id: '15188191', user_id: status.user.id_str, screen_name: status.user.screen_name }, function(error, data, response) {
 
 			  		// console.log(data);
 			  		// console.log(response);
