@@ -322,7 +322,7 @@ app.get('/contest', function(req, res) {
 	  			console.log(data.following);
 	  			res.write( 'Following Status: ' + data.following );	
 
-				// id: 929158451766353900,
+				// id: 929158451766353920,
 				// id_str: '929158451766353920',
 				// name: 'Contests-and-Raffles',
 				// uri: '/vannscontests/lists/contests-and-raffles',
@@ -470,7 +470,7 @@ app.get('/retweet', function(req, res) {
 	  			console.log(data.following);
 	  			res.write( 'Following Status: ' + data.following );	
 
-  				// id: 929158451766353900,
+  				// id: 929158451766353920,
 				// id_str: '929158451766353920',
 				// name: 'Contests-and-Raffles',
 				// uri: '/vannscontests/lists/contests-and-raffles',
@@ -482,7 +482,7 @@ app.get('/retweet', function(req, res) {
 				// screen_name: 'vannscontests',
 
 
-				T.post('lists/members/create', { list_id: '929158451766353900', owner_id: '15188191', user_id: status.user.id_str, screen_name: status.user.screen_name }, function(error, data, response) {
+				T.post('lists/members/create', { list_id: '929158451766353920', owner_id: '15188191', user_id: status.user.id_str, screen_name: status.user.screen_name }, function(error, data, response) {
 
 			  		// console.log(data);
 			  		// console.log(response);
@@ -495,14 +495,27 @@ app.get('/retweet', function(req, res) {
 			  			// console.log(data);
 
 			  			T.post('statuses/retweet/:id', { id: id }, function (err, data, response) {
-						  console.log(data);
-						  res.end();
-						})
+						  
+			  			  if( data != undefined && !error && response.statusCode == 200 ){
+			  			  	  // console.log(data);
+			  			  	  console.log(response.statusCode);
+							  res.write( 'Retweeted!');	
+							  res.end();
+			  			  }
+			  			  else if( error )
+						  {
+							console.log(error);	
+							res.write(response.statusCode);
+							res.end();  			
+						  }
+						  
+						});
 
 			  		}
 			  		else if( error )
 			  		{
 						console.log(error);	
+						res.write(response.statusCode);
 						res.end();  			
 			  		}
 
@@ -547,6 +560,8 @@ app.get('/retweet', function(req, res) {
 		console.log(error);	
 		console.log(data);
 		console.log(response.statusCode);
+
+		res.write( response.statusCode );	
 		res.end();
 	  }
 	  
