@@ -85,7 +85,9 @@ function getFriends(){
 			console.log('Cache MISS: getFriends Index: '+a );
 			twitterApi( method, command, options, function(data){
 				for( i = 0; i < data.users.length; i++){
-				    	recordAccount(data.users[i], i, function(error, results, data){ });
+				    	recordAccount(data.users[i], i, function(error, results, data){ 
+				    		console.log('Recorded friend: '+ data.screen_name );
+				    	 });
 					}
 				wait(pause);
 				if( data.next_cursor_str != 0 ){
@@ -102,7 +104,9 @@ function getFriends(){
 		}else{ // Cache HIT
 			console.log('Cache HIT: getFriends Index: '+a );
 			for( i = 0; i < data.users.length; i++){
-			    	recordAccount(data.users[i], i, function(error, results, data){ });
+			    	recordAccount(data.users[i], i, function(error, results, data){ 
+				    	console.log('Recorded friend: '+ data.screen_name );
+			    	});
 				}
 			if( data.next_cursor_str != undefined && data.next_cursor_str != 0 ){
 				cursor = data.next_cursor_str;
@@ -127,7 +131,9 @@ function getFollowers(){
 			console.log('Cache MISS: getFollowers Index: '+a );
 			twitterApi( method, command, options, function(data){
 				for( i = 0; i < data.users.length; i++){
-				    	recordAccount(data.users[i], i, function(error, results, data, index){ });
+				    	recordAccount(data.users[i], i, function(error, results, data, index){ 
+					    	console.log('Recorded follower: '+ data.screen_name );
+				    	});
 					}
 				wait(pause);
 				if( data.next_cursor_str != 0 ){
@@ -144,7 +150,9 @@ function getFollowers(){
 			console.log('Cache HIT: getFollowers Index: '+a );	
 			if(data.code == 200){
 				for( i = 0; i < data.users.length; i++){
-				    	recordAccount(data.users[i], i, function(error, results, data, index){ });
+				    	recordAccount(data.users[i], i, function(error, results, data, index){ 
+					    	console.log('Recorded follower: '+ data.screen_name );
+				    	});
 					}
 			}
 			if( data.next_cursor_str != 0 ){
