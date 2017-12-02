@@ -4,11 +4,7 @@
   "description": "Retweets #Giveaways and #Contests",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.16.2",
-    "phrasejumble": "git+https://git@github.com/bradmkjr/phrasejumble.git",
-    "querystring": "^0.2.0",
-    "sqlcachedb": "^1.1.4",
-    "sqlite3": "^3.1.13",
+    "pg": "^7.4.0",
     "twit": "^2.2.9"
   },
   "devDependencies": {},
